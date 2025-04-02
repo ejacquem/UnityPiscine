@@ -10,10 +10,10 @@ public class FeetCollision : MonoBehaviour
         player = gameObject.GetComponentInParent<Player>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         player.SetGrounded(true);
-        Debug.Log("Jump collider was hit");
+        Debug.Log("Jump collider stay");
     }
 
     void OnTriggerExit(Collider other)

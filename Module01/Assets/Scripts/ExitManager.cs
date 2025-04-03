@@ -14,16 +14,24 @@ public class ExitManager : MonoBehaviour
     private float _kickSpeed;
 
     private bool _allPlayerOnExit = false;
+    private const float _exitTime = 2f;
+    public float _exitTimer = _exitTime;
 
     Vector3 AbsVector3(Vector3 v)
     {
         return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
     }
 
+    void Start()
+    {
+        _exitTimer = _exitTime;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(_allPlayerOnExit){
+            _exitTimer -= Time.deltaTime;
             KickPlayerOut();
             return;
         }

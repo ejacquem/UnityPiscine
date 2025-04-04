@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 60011022}
   - component: {fileID: 60011021}
   - component: {fileID: 60011020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 305299078}
   - component: {fileID: 305299077}
   - component: {fileID: 305299076}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (8)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 414974913}
   - component: {fileID: 414974912}
   - component: {fileID: 414974911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,6 +536,9 @@ MonoBehaviour:
   maxSpeed: 5
   gravity: 1000
   downGravityMult: 1.5
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &484532174
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -664,7 +667,7 @@ GameObject:
   - component: {fileID: 507770614}
   - component: {fileID: 507770613}
   - component: {fileID: 507770612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,6 +888,9 @@ MonoBehaviour:
   maxSpeed: 5
   gravity: 1000
   downGravityMult: 1.5
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &890504585
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1020,7 +1026,7 @@ GameObject:
   - component: {fileID: 978694400}
   - component: {fileID: 978694399}
   - component: {fileID: 978694398}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1300,6 +1306,9 @@ MonoBehaviour:
   maxSpeed: 5
   gravity: 1000
   downGravityMult: 1.5
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &1218433090
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1428,7 +1437,7 @@ GameObject:
   - component: {fileID: 1230994979}
   - component: {fileID: 1230994978}
   - component: {fileID: 1230994977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1555,7 @@ GameObject:
   - component: {fileID: 1312410585}
   - component: {fileID: 1312410584}
   - component: {fileID: 1312410583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1916,7 +1925,7 @@ GameObject:
   - component: {fileID: 1517214639}
   - component: {fileID: 1517214638}
   - component: {fileID: 1517214637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2024,7 +2033,7 @@ GameObject:
   - component: {fileID: 1542167608}
   - component: {fileID: 1542167607}
   - component: {fileID: 1542167606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -64,7 +64,7 @@ MonoBehaviour:
   downGravityMult: 1.5
   raycastMask:
     serializedVersion: 2
-    m_Bits: 951
+    m_Bits: 1015
 --- !u!23 &641949107169713616
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ Transform:
   m_GameObject: {fileID: 5809857271414961529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1000005, y: -0.45000005, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 0.24000001, y: 0.120000005, z: 0.24}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -204,7 +204,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

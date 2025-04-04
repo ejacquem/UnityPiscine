@@ -44,7 +44,8 @@ public class ExitManager : MonoBehaviour
 
             // if(i == 0) Debug.Log($"dist.x = {dist.x}, dist.y = {dist.y}");
             if (dist.x + dist.y < _tolerance){
-                _exits[i].GetComponent<SpriteRenderer>().color = _players[i].GetComponent<MeshRenderer>().material.color;
+                _exits[i].GetComponent<SpriteRenderer>().color = Color.green;
+                // _exits[i].GetComponent<SpriteRenderer>().color = _players[i].GetComponent<MeshRenderer>().material.color;
             }
             else{
                 _exits[i].GetComponent<SpriteRenderer>().color = Color.black;

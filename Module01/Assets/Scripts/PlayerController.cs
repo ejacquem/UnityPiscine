@@ -77,9 +77,8 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("Onmove called");
         _input = value.Get<Vector2>();
+        Debug.Log($"_input {_input}");
         currentPlayer.SetInput(_input);
-        if (_input.y > 0)
-            OnJump();
     }
 
     private void OnJump()

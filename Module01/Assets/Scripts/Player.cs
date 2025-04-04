@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     public const float GroundedTime = 0.075f;
     public const float NoJumpTime = 0.1f;
 
+    [SerializeField]
+    private LayerMask raycastMask;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -62,7 +65,7 @@ public class Player : MonoBehaviour
         float maxDistance = transform.localScale.x - xOffset * 2f;
 
         RaycastHit hit;
-        if (Physics.Raycast(origin, Vector3.right, out hit, maxDistance))
+        if (Physics.Raycast(origin, Vector3.right, out hit, maxDistance, raycastMask))
         {
             // Debug.Log("Hit: " + hit.collider.name);
             // Debug.DrawRay(origin, Vector3.right * hit.distance, Color.red, 5f);
@@ -74,7 +77,7 @@ public class Player : MonoBehaviour
 
             origin += new Vector3(0, yOffset * 2f,0);
             maxDistance = 0.1f;
-            if (Physics.Raycast(origin, Vector3.down, out hit, maxDistance))
+            if (Physics.Raycast(origin, Vector3.down, out hit, maxDistance, raycastMask))
             {
                 // Debug.Log("Hit: " + hit.collider.name);
                 // Debug.DrawRay(origin, Vector3.down * hit.distance, Color.red, 5f);

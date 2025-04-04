@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq.Expressions;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
@@ -92,11 +93,18 @@ public class Player : MonoBehaviour
         
     }
 
+    public IEnumerator DisableFeet(float seconds)
+    {
+        StickyFeet feet = transform.GetComponentInChildren<StickyFeet>();
+        feet.enabled = false;
+        yield return new WaitForEndOfFrame();
+        feet.enabled = true;
+    }
+
     public void Jump()
     {
         if(_canJump)
             _rb.AddForce(playerJumpForce * transform.up);
-        Debug.Log("player jump -------------------------------");
     }
 
 }

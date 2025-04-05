@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 9221745796751025043}
   - component: {fileID: 8497358569142297918}
   - component: {fileID: 3191548160853578053}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: John
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -130,7 +130,8 @@ MonoBehaviour:
   downGravityMult: 1.5
   raycastMask:
     serializedVersion: 2
-    m_Bits: 1015
+    m_Bits: 29687
+  platformLayer: 9
 --- !u!23 &9221745796751025043
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -216,7 +217,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0

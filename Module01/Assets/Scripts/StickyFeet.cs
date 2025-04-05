@@ -13,12 +13,15 @@ public class StickyFeet : MonoBehaviour
         player = transform.parent;
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        ground = other.transform;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"{player.name} is on top of: {other.name}");
         ground = other.transform;
-        if(ground == null)
-            Debug.LogError("groudn NULL wtf");
         old_pos = ground.position;
     }
 

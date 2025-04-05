@@ -42,10 +42,14 @@ public class PlayerController : MonoBehaviour
             SelectPlayer(1);
         if (Input.GetKeyDown(KeyCode.Alpha3))
             SelectPlayer(2);
-        if (Input.GetKeyDown(KeyCode.Alpha4)){
-            overviewEnable = true;
-            _prevCameraPos = mainCamera.position;
-            switchTime = timeToswitch;
+        if (Input.GetKeyDown(KeyCode.V)){
+            if (overviewEnable)
+                SelectPlayer(playerIndex);
+            else {
+                overviewEnable = true;
+                _prevCameraPos = mainCamera.position;
+                switchTime = timeToswitch;
+            }
         }
     }
 

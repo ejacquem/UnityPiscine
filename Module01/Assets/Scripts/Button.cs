@@ -2,12 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct Door
+{
+    public Transform transform;
+    public Color color;
+    public Collider collider;
+}
+
 public class Button : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> doors;
-    private List<Tuple<GameObject, Color>> doorsList;
-
     [SerializeField]
     private List<GameObject> platforms;
 
@@ -24,13 +29,19 @@ public class Button : MonoBehaviour
     private Material buttonMat;
     private bool buttonActivated;
 
+    private List<Door> doorsList;
+
     void Start()
     {
         buttonMat = GetComponent<MeshRenderer>().material;
-        doorsList = new List<Tuple<GameObject, Color>>();
+        doorsList = new List<Door>();
         foreach (var door in doors)
         {
-            doorsList.Add(new Tuple<GameObject, Color>(door, door.GetComponentInChildren<MeshRenderer>().material.color));
+            Door d;
+            d.transform = door.transform; 
+            d.color = door.GetComponentInChildren<MeshRenderer>().material.color;
+            d.collider = door.GetComponentInChildren<Collider>();
+            doorsList.Add(d);
         }
     }
 
@@ -45,9 +56,13 @@ public class Button : MonoBehaviour
         // change the doors scale
         foreach (var door in doorsList)
         {
-            Vector3 doorScale = door.Item1.transform.localScale;
-            doorScale.y = Mathf.Clamp(doorScale.y + delta * (buttonMat.color == door.Item2 ? -1 : 1), doorMinSize, 1f);
-            door.Item1.transform.localScale = doorScale;
+            Vector3 doorScale = door.transform.localScale;
+            doorScale.y = Mathf.Clamp(doorScale.y + delta * (buttonActivated && buttonMat.color == door.color ? -1 : 1), doorMinSize, 1f);
+            door.transform.localScale = doorScale;
+            if (doorScale.y == doorMinSize)
+                door.collider.enabled = false;
+            else
+                door.collider.enabled = true;
         }
     }
 

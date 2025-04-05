@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask raycastMask;
 
+    public int platformLayer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

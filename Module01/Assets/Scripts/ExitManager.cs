@@ -17,11 +17,6 @@ public class ExitManager : MonoBehaviour
     private const float _exitTime = 2f;
     public float _exitTimer = _exitTime;
 
-    Vector3 AbsVector3(Vector3 v)
-    {
-        return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
-    }
-
     void Start()
     {
         _exitTimer = _exitTime;
@@ -40,7 +35,7 @@ public class ExitManager : MonoBehaviour
         {
             Vector3 playerPos = _players[i].transform.position;
             playerPos.y -= _players[i].transform.localScale.y * 0.5f;
-            Vector3 dist = AbsVector3(_exits[i].transform.position - playerPos);
+            Vector3 dist = VectorUtils.AbsVector3(_exits[i].transform.position - playerPos);
 
             // if(i == 0) Debug.Log($"dist.x = {dist.x}, dist.y = {dist.y}");
             if (dist.x + dist.y < _tolerance){

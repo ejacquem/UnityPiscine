@@ -8,28 +8,39 @@ public class StickyFeet : MonoBehaviour
 
     private Vector3 old_pos;
 
+    private Collider currentCollider;
+
     void Start()
     {
         player = transform.parent;
+        currentCollider = null;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        ground = other.transform;
+        if (currentCollider == null){
+            currentCollider = other;
+            ground = other.transform;
+            old_pos = ground.position;
+        }
+        else if (currentCollider == other)
+            ground = other.transform;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log($"{player.name} is on top of: {other.name}");
-        ground = other.transform;
-        old_pos = ground.position;
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     Debug.Log($"{player.name} is on top of: {other.name}");
+    //     currentCollider = other;
+    //     ground = other.transform;
+    //     old_pos = ground.position;
+    // }
 
     private void OnTriggerExit(Collider other)
     {
         if(ground)
             Debug.Log($"{player.name} left top of: {ground.name}");
         ground = null;
+        currentCollider = null;
     }
 
     void Update()

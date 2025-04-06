@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         if (overviewEnable)
             FollowPosition(overviewPosition.position);
-        else
-            FollowPosition(players[playerIndex].transform.position);
+        else if (!currentPlayer.IsDead())
+            FollowPosition(currentPlayer.transform.position);
         
         if (Input.GetKeyDown(KeyCode.E))
             SelectPlayer(++playerIndex);
@@ -87,5 +87,15 @@ public class PlayerController : MonoBehaviour
     private void OnJump()
     {
         currentPlayer.Jump();
+    }
+
+    public bool IsAPlayerDead()
+    {
+        foreach (var player in players)
+        {
+            if (player.IsDead())
+                return true;
+        }
+        return false;
     }
 }

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     private PlayerController _playerController;
     [SerializeField]
     private ExitManager _exitManager;
+    [SerializeField]
+    private UIManager _uiManager;
 
     [SerializeField]
     private GameObject _backGround;
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     private float _bgWhitePercent;
 
     private int _sceneIndex = 0;
+    private float gameOverRestartTimer = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +33,14 @@ public class GameManager : MonoBehaviour
         CheckWin();
         if (Input.GetKeyDown(KeyCode.R)){
             ResetScene();
+        }
+        if (_playerController.IsAPlayerDead()){
+            _uiManager.GameOver();
+            gameOverRestartTimer -= Time.deltaTime;
+            if (gameOverRestartTimer <= 0f)
+            {
+                ResetScene();
+            }
         }
     }
 
@@ -47,6 +58,7 @@ public class GameManager : MonoBehaviour
     private void ResetScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     private void NextScene(){
         _sceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
         SceneManager.LoadScene(_sceneIndex);

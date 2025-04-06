@@ -17,12 +17,16 @@ public class Player : MonoBehaviour
     private Rigidbody _rb;
     private bool _canJump = false;
     private float _isGroundedTimer = 0f;
+    private bool _isDead = false;
 
     public const float GroundedTime = 0.075f;
     public const float NoJumpTime = 0.1f;
 
     [SerializeField]
     private LayerMask raycastMask;
+
+    [SerializeField]
+    private GameObject deathParticle;
 
     public int platformLayer;
 
@@ -57,6 +61,10 @@ public class Player : MonoBehaviour
 
     public void SetInput(Vector2 input)
     {
+        if(_isDead){
+            _input = Vector2.zero;
+            return;
+        }
         _input = input;
     }
 
@@ -105,8 +113,28 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
+        if(_isDead)
+            return;
         if(_canJump)
             _rb.AddForce(playerJumpForce * transform.up);
     }
 
+    public void Die()
+    {
+        _isDead = true;
+    }
+
+    public void Kill()
+    {
+        if (_isDead)
+            return;
+        _isDead = true;
+        Instantiate(deathParticle, transform.position, Quaternion.identity);
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public bool IsDead()
+    {
+        return _isDead;
+    }
 }

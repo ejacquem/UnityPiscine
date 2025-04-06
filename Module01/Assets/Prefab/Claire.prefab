@@ -65,6 +65,7 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 29687
+  deathParticle: {fileID: 7841765643708598075, guid: e66f8f20d2e6a3e17a147a5a2cb66907, type: 3}
   platformLayer: 8
 --- !u!23 &641949107169713616
 MeshRenderer:

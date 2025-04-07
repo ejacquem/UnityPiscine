@@ -1,7 +1,8 @@
 using UnityEngine;
 using TMPro;
+using System;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI fpsText;
     public TextMeshProUGUI titleText;
@@ -21,7 +22,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void SetFps()
     {
-        // deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        fpsText.SetText($"FPS: {Mathf.RoundToInt(1.0f / Time.deltaTime)}");
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        fpsText.SetText($"FPS: {Mathf.RoundToInt(1.0f / deltaTime)}");
+    }
+
+    public void SetTitle(String text, Color textColor)
+    {
+        titleText.SetText(text);
+        titleText.color = textColor;
     }
 }

@@ -11,6 +11,9 @@ public class Spawner : MonoBehaviour
 
     [SerializeField]
     private GameObject _enemyPrefab;
+    [SerializeField]
+    private int _enemyToSpawn;
+    private int _enemySpawned = 0;
 
     void Start()
     {
@@ -21,7 +24,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!_isActive)
+        if(!_isActive || IsEmpty())
             return;
         _spawnTimer -= Time.deltaTime;
         if(_spawnTimer <= 0){
@@ -32,6 +35,18 @@ public class Spawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        _enemySpawned++;
         Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+    }
+
+    // return if the spawner has no more enemy to spawn
+    public bool IsEmpty()
+    {
+        return _enemySpawned >= _enemyToSpawn;
+    }
+
+    public int GetEnemyToSpawn()
+    {
+        return _enemyToSpawn;
     }
 }

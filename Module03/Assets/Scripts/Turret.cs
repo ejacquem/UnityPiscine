@@ -16,6 +16,9 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private GameObject _bulletPrefab;
 
+    [SerializeField]
+    private float _price;
+
     private List<GameObject> _enemyList;
     private Transform _currentTarget;
 
@@ -25,6 +28,11 @@ public class Turret : MonoBehaviour
         if (transform.position.x < 0)
             transform.rotation = Quaternion.Euler(0, 180, 0);
     }
+
+    public float GetDamage(){return _damage;}
+    public float GetFireRate(){return _fireRate;}
+    public float GetPrice(){return _price;}
+
 
     void Update()
     {
@@ -37,6 +45,11 @@ public class Turret : MonoBehaviour
         }
     }
 
+    private bool Compare2DDist(Vector3 A, Vector3 B)
+    {
+        return A.x*A.x+A.y*A.y < B.x*B.x+B.y*B.y;
+    }
+
     private void Fire()
     {
         // Find closest enemy
@@ -44,10 +57,16 @@ public class Turret : MonoBehaviour
         closestEnemy = _enemyList[0];
         foreach (GameObject enemy in _enemyList)
         {
-            if (Vector3.Distance(transform.position, enemy.transform.position) < Vector3.Distance(transform.position, closestEnemy.transform.position))
+            if (enemy == null)
+                continue;
+            if (closestEnemy == null)
+                closestEnemy = enemy;
+            if (Compare2DDist(enemy.transform.position - transform.position, closestEnemy.transform.position - transform.position))
                 closestEnemy = enemy;
         }
 
+        if (closestEnemy == null)
+            return;
         // Shoot bullet
         GameObject bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation);
         bullet.GetComponent<Bullet>().DamageMult(_damage);

@@ -30,9 +30,16 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (_health <= 0)
+        {
+            Debug.LogWarning("Already dead Somehow");
+            return;
+        }
         _health -= damage;
-        if(_health <= 0)
+        if(_health <= 0){
+            GameManager.Instance.LogEnemyDefeated();
             Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

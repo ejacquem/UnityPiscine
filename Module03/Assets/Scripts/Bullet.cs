@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
         _damage = _basicDamage * damage;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy")){
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();

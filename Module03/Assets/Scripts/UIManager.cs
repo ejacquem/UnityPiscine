@@ -4,26 +4,24 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI fpsText;
+    public TextMeshProUGUI energyText;
     public TextMeshProUGUI titleText;
-
-    private float deltaTime = 0.0f;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public TextMeshProUGUI baseHPText;
 
     void Update()
     {
-        SetFps();
+        SetEnergy(GameManager.Instance.GetEnergy());
+        SetBaseHP(GameManager.Instance.GetBaseHP());
     }
 
-    private void SetFps()
+    public void SetEnergy(float energy)
     {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        fpsText.SetText($"FPS: {Mathf.RoundToInt(1.0f / deltaTime)}");
+        energyText.SetText($"Energy: {Mathf.FloorToInt(energy)}");
+    }
+
+    public void SetBaseHP(float hp)
+    {
+        baseHPText.SetText($"Base HP: {Mathf.FloorToInt(hp)}");
     }
 
     public void SetTitle(String text, Color textColor)

@@ -38,17 +38,23 @@ public class Enemy : MonoBehaviour
         _health -= damage;
         if(_health <= 0){
             GameManager.Instance.LogEnemyDefeated();
-            Destroy(gameObject);
+            Die();
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"Collided with: {collision.gameObject.name}");
+        // Debug.Log($"Collided with: {collision.gameObject.name}");
         if (collision.gameObject.CompareTag("Base")){
             Base b = collision.gameObject.GetComponent<Base>();
             b.TakeDamage(1);
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        GameManager.Instance.LogEnemyDead();
+        Destroy(gameObject);
     }
 }

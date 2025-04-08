@@ -5,6 +5,8 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private float _timeToSpawn;
     [SerializeField]
+    private float _timeToSpawnMult;
+    [SerializeField]
     private float _startTime;
     private float _spawnTimer;
     public bool _isActive;
@@ -28,6 +30,7 @@ public class Spawner : MonoBehaviour
             return;
         _spawnTimer -= Time.deltaTime;
         if(_spawnTimer <= 0){
+            _timeToSpawn *= _timeToSpawnMult;
             _spawnTimer = _timeToSpawn;
             SpawnEnemy();
         }

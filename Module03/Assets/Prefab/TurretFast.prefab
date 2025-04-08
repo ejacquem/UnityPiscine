@@ -137,8 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87a0dc869c1e75029e5854ecbbf231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireRate: 10
+  _fireRate: 10.5
   _damage: 0.1
   _bulletSpeed: 5
   _bulletPrefab: {fileID: 9154603294877087865, guid: 82c4f0a5e3b278075922184e62fe7e43, type: 3}
-  _price: 3
+  _price: 7
+  _dps: 1.0500001
+  _dpsPerCost: 0.15

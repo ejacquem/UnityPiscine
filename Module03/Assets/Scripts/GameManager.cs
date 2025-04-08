@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _energyGainSpeed;
 
-    private int _enemyDefeated = 0;
+    private int _enemyDefeated = 0; // enemy killed by the player
+    private int _enemyDead = 0; // enemy killed by the player and the base
     private bool _gameEnded = false;
 
     [SerializeField]
@@ -57,12 +58,12 @@ public class GameManager : MonoBehaviour
         {
             GameFinished(false);
         }
-        if(_spawner.IsEmpty()){
-            Debug.Log($"_enemyDefeated: {_enemyDefeated}");
-            Debug.Log($"_spawner.GetEnemyToSpawn(): {_spawner.GetEnemyToSpawn()}");
-            Debug.Log("Spawner Empty");
-        }
-        if (_spawner.IsEmpty() && _enemyDefeated == _spawner.GetEnemyToSpawn())
+        // if(_spawner.IsEmpty()){
+        //     Debug.Log($"_enemyDefeated: {_enemyDefeated}");
+        //     Debug.Log($"_spawner.GetEnemyToSpawn(): {_spawner.GetEnemyToSpawn()}");
+        //     Debug.Log("Spawner Empty");
+        // }
+        if (_spawner.IsEmpty() && _enemyDead == _spawner.GetEnemyToSpawn())
         {
             GameFinished(true);
         }
@@ -111,6 +112,11 @@ public class GameManager : MonoBehaviour
         _enemyDefeated++;
     }
 
+    public void LogEnemyDead()
+    {
+        _enemyDead++;
+    }
+
     public enum Rank {F, E, D, C, B, A, S};
     public enum Title {IdiotOfTheVillage, Peasant, Apprentice, Knight, Champion, LegendaryWarrior, HeroOfTheVillage};
 
@@ -121,9 +127,15 @@ public class GameManager : MonoBehaviour
 
     public int GetScoreIndex(int score)
     {
-        int F = _rankFMaxScore;
-        int S = _rankSMinScore;
-        float result = (score - F) / (S - F) * 6;
+        float F = _rankFMaxScore;
+        float S = _rankSMinScore;
+        float result = 6 * ((float)score - F) / (S - F);
+        Debug.Log($"score: {score} -----------------------------------------");
+        Debug.Log($"F: {F}");
+        Debug.Log($"S: {S}");
+        Debug.Log($"(score - F) / (S - F): {(score - F) / (S - F)}");
+        Debug.Log($"result: {result}");
+        Debug.Log($"Mathf.Clamp((int)result, 0, 6): {Mathf.Clamp((int)result, 0, 6)}");
         return Mathf.Clamp((int)result, 0, 6);
     }
 

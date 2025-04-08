@@ -22,6 +22,11 @@ public class Turret : MonoBehaviour
     private List<GameObject> _enemyList;
     private Transform _currentTarget;
 
+    [SerializeField]
+    private float _dps;
+    [SerializeField]
+    private float _dpsPerCost;
+
     void Start()
     {
         _enemyList = new List<GameObject>();
@@ -39,7 +44,7 @@ public class Turret : MonoBehaviour
         _fireTimer -= Time.deltaTime;
         if (_fireTimer <= 0 && _enemyList.Count > 0)
         {
-            Debug.Log("Fire !");
+            // Debug.Log("Fire !");
             Fire();
             _fireTimer = 1f / _fireRate;
         }
@@ -86,18 +91,24 @@ public class Turret : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"Turret Collided");
+        // Debug.Log($"Turret Collided");
         if (collision.gameObject.CompareTag("Enemy")){
-            Debug.Log($"Enemy entered Turret radius");
+            // Debug.Log($"Enemy entered Turret radius");
             _enemyList.Add(collision.gameObject);
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log($"Enemy exit Turret radius");
+        // Debug.Log($"Enemy exit Turret radius");
         if (collision.gameObject.CompareTag("Enemy")){
             _enemyList.Remove(collision.gameObject);
         }
+    }
+
+    private void OnValidate()
+    {
+        _dps = _damage * _fireRate;
+        _dpsPerCost = _dps / _price;
     }
 }

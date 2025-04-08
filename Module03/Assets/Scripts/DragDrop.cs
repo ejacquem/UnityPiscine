@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 
-public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IInitializePotentialDragHandler
 {
     [SerializeField]
     private Canvas canvas;
@@ -33,6 +33,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         infoText.SetText($"Damage: {turret.GetDamage()}\nPrice: {turret.GetPrice()}\nFireRate: {turret.GetFireRate()}\n");
     }
 
+    public void OnInitializePotentialDrag(PointerEventData eventData)
+    {
+        eventData.useDragThreshold = false;
+    }
+
     private void Update()
     {
         if (turretPrice <= GameManager.Instance.GetEnergy())
@@ -45,7 +50,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
+        // Debug.Log("OnBeginDrag");
         if (turretPrice > GameManager.Instance.GetEnergy())
             return;
         isDrag = true;
@@ -55,7 +60,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        // Debug.Log("OnEndDrag");
         if(isDrag == false)
             return;
         isDrag = false;
@@ -75,6 +80,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDown");
+        // Debug.Log("OnPointerDown");
     }
 }

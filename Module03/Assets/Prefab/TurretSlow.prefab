@@ -141,6 +141,6 @@ MonoBehaviour:
   _damage: 0.3
   _bulletSpeed: 5
   _bulletPrefab: {fileID: 9154603294877087865, guid: 82c4f0a5e3b278075922184e62fe7e43, type: 3}
-  _price: 3
+  _price: 2
   _dps: 0.3
-  _dpsPerCost: 0.1
+  _dpsPerCost: 0.15

@@ -56,6 +56,12 @@ public class EndGameMenu : MonoBehaviour
         }
         else
         {
+            confetti.SetActive(true);
+            for (int i = 0; i < confetti.transform.childCount; i++)
+            {
+                var child = confetti.transform.GetChild(i);
+                child.gameObject.SetActive(child.name == "Background");
+            }
             replayButton.SetActive(true);
             titleText.SetText("You Lost :(");
             descriptionText.SetText($"The villagers appreciated your help though.\nThey said you're a true {title} !\n\nScore : {score}\nRank : {rank}");

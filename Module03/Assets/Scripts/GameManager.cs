@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     public int GetScore()
     {
-        return _enemyDefeated * 10 + (int)_energy;
+        return (int)GetBaseHP() * 20 + _enemyDefeated * 10 + (int)_energy;
     }
 
     public int GetScoreIndex(int score)

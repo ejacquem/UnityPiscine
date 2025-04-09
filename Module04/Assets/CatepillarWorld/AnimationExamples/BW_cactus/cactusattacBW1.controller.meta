@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e8e2c94c1fb5f134a82f48a74ef75eac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202781
+  packageName: Caterpillar World Sprite Bundle
+  packageVersion: 1.0
+  assetPath: Assets/CatepillarWorld/AnimationExamples/BW_cactus/cactusattacBW1.controller
+  uploadId: 452383

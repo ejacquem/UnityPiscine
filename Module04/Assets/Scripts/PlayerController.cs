@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,9 +32,10 @@ public class PlayerController : MonoBehaviour
 
     public void Spawn()
     {
+        AudioManager.Instance.Play("Spawn");
         _animator.SetTrigger("Spawn");
         _health = _maxHealth;
-        transform.position = _spawnPosition;
+        transform.SetPositionAndRotation(_spawnPosition, Quaternion.Euler(0 ,0, 0));
     }
 
     private void FixedUpdate()
@@ -47,7 +49,8 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("Onjump");
         // Debug.Log($"IsGrounded(): {IsGrounded()}");
-        if (IsGrounded()){
+        if (IsGrounded() && _health > 0){
+            AudioManager.Instance.Play("Jump");
             _animator.SetTrigger("Jump");
             _rb.AddForce(Vector2.up * _jumpForce);
         }
@@ -59,11 +62,15 @@ public class PlayerController : MonoBehaviour
         if (_health <= 0)
             Die();
         else
+        {
+            AudioManager.Instance.Play("Hit");
             _animator.SetTrigger("TakeDamage");
+        }
     }
 
     public void Die()
     {
+        AudioManager.Instance.Play("Death");
         _animator.SetTrigger("Die");
     }
 
@@ -71,6 +78,10 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("OnMove");
         _input = value.Get<Vector2>();
+        if (_input.x > 0)
+            transform.rotation = Quaternion.Euler(0 ,0, 0);
+        else if (_input.x < 0)
+            transform.rotation = Quaternion.Euler(0 ,180, 0);
     }
     
     private bool IsGrounded()

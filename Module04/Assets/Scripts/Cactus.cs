@@ -42,8 +42,9 @@ public class Cactus : MonoBehaviour
         _animator.SetTrigger("Shoot");
     }
 
-    private void Shoot()
+    public void Shoot()
     {
+        AudioManager.Instance.Play("Cactus");
         GameObject bullet = Instantiate(_bulletPrefab, transform.position, quaternion.identity);
         bullet.GetComponent<Bullet>().SetDamage(_damage);
         bullet.GetComponent<Rigidbody2D>().linearVelocityX = _bulletSpeed * -transform.right.x;

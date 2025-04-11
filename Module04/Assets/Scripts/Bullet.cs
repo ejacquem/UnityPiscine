@@ -4,6 +4,10 @@ public class Bullet : MonoBehaviour
 {
     private float _damage;
 
+    void Awake()
+    {
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

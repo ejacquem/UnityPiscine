@@ -6,19 +6,34 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _raycastMask;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _playerSpeed;
+    [SerializeField] private float _health;
+    [SerializeField] private float _maxHealth;
+    private Vector3 _spawnPosition;
 
     private Rigidbody2D _rb;
     private Vector2 _input;
     private Animator _animator;
 
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
+        _health = _maxHealth;
+        _spawnPosition = transform.position;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+            TakeDamage(1);
+    }
+
+    public void Spawn()
+    {
+        _animator.SetTrigger("Spawn");
+        _health = _maxHealth;
+        transform.position = _spawnPosition;
     }
 
     private void FixedUpdate()
@@ -32,8 +47,24 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("Onjump");
         // Debug.Log($"IsGrounded(): {IsGrounded()}");
-        if (IsGrounded())
+        if (IsGrounded()){
+            _animator.SetTrigger("Jump");
             _rb.AddForce(Vector2.up * _jumpForce);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _health -= damage;
+        if (_health <= 0)
+            Die();
+        else
+            _animator.SetTrigger("TakeDamage");
+    }
+
+    public void Die()
+    {
+        _animator.SetTrigger("Die");
     }
 
     public void OnMove(InputValue value)

@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Camera : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _player;
     [SerializeField] private Vector2 _yBound;
@@ -9,7 +8,6 @@ public class Camera : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     void Update()

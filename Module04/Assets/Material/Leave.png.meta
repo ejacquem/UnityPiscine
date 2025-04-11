@@ -1,17 +1,10 @@
 fileFormatVersion: 2
-guid: a3830e2a5323bb141b40b6d7709ff67c
-AssetOrigin:
-  serializedVersion: 1
-  productId: 202781
-  packageName: Caterpillar World Sprite Bundle
-  packageVersion: 1.0
-  assetPath: Assets/CatepillarWorld/Grass.png
-  uploadId: 452383
+guid: 971b64c66d3c229128f6c591b2d7fba0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 21300000
-    second: Grass_0
+      213: 3299885491605100993
+    second: Leave_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -47,15 +40,15 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
+    wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -73,9 +66,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -107,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grass_0
+      name: Leave_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 27
         y: 0
-        width: 1920
-        height: 1080
+        width: 171
+        height: 222
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2a61409442a895340aee852d3bd75392
-      internalID: 21300000
+      spriteID: 1c9569efe5c8bcd20800000000000000
+      internalID: 3299885491605100993
       vertices: []
       indices: 
       edges: []
@@ -132,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c998e76b3a6d8cf4694674f575863c3f
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -141,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Grass_0: 21300000
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

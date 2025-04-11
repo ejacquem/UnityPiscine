@@ -3,6 +3,8 @@ using UnityEngine;
 public class Liana : MonoBehaviour
 {
     private Animator _animator;
+    private GameObject _player;
+    [SerializeField] private float _damage;
 
     void Start()
     {
@@ -15,23 +17,41 @@ public class Liana : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log($"Liana collided with {collision.name}");
+        if (collision.CompareTag("Player") && !_animator.GetBool("Attacking"))
+        {
+            Debug.Log($"Liana collided with {collision.name}");
+            Attack();
+            _player = collision.gameObject;
+        }
+    }
+
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
         if (collision.CompareTag("Player"))
         {
-            Attack();
+            _player = null;
         }
     }
 
     private void Attack()
     {
-        _animator.SetTrigger("Attack");
+        _animator.SetBool("Attacking", true);
         Debug.Log($"Attack");
     }
 
-    public void Func()
+    public void AttackDone()
     {
-        Debug.Log("Bim !");
+        _animator.SetBool("Attacking", false);
+    }
+
+    public void DamagePlayer()
+    {
+        if (_player)
+        {
+            _player.GetComponent<PlayerController>().TakeDamage(_damage);
+        }
     }
 }

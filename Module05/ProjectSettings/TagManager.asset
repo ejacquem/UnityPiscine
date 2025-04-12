@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - Ground
+  - Player
+  - Liana
+  - Cactus
+  - Bullet
+  - 
+  - Collectable
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2635836529
+    locked: 0
+  - name: EnvBack
+    uniqueID: 3419139933
+    locked: 0
+  - name: Player
+    uniqueID: 319585975
+    locked: 0
+  - name: Level
+    uniqueID: 2063091895
+    locked: 0
+  - name: EnvFront
+    uniqueID: 3565001193
+    locked: 0
+  - name: Foreground
+    uniqueID: 3934767701
+    locked: 0
+  m_RenderingLayers:
+  - Default

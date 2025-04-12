@@ -10,11 +10,9 @@ public class GameManager : MonoBehaviour
     private int _points;
     private int _totalPoints;
     private int _deathsCount;
-    private int _unlockedStage = 1;
 
     void Start()
     {
-        UIManager.Instance.DisplayPlayerPoints(_points);
         if (Instance == null)
             Instance = this;
         else
@@ -31,12 +29,9 @@ public class GameManager : MonoBehaviour
 
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            AddUnlockStage(nextSceneIndex);
-            PlayerPrefs.DeleteKey("Health");
-            PlayerPrefs.DeleteKey("Points");
-            _points = 0;
-            PlayerPrefs.DeleteKey("PositionX");
-            PlayerPrefs.DeleteKey("PositionY");
+            AddUnlockStage(nextSceneIndex - 1);
+            ResetOnLoadStage();
+            Debug.Log($"Loading scene: {nextSceneIndex}");
             SceneManager.LoadScene(nextSceneIndex);
         }
         else
@@ -46,16 +41,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // to be called BEFORE loading the stage
+    public void ResetOnLoadStage()
+    {
+        PlayerPrefs.DeleteKey("Health");
+        PlayerPrefs.DeleteKey("Points");
+        _points = 0;
+        PlayerPrefs.DeleteKey("PositionX");
+        PlayerPrefs.DeleteKey("PositionY");
+        OnLoadStage();
+    }
+
+    public void OnLoadStage()
+    {
+        _points = PlayerPrefs.GetInt("Points", 0);
+        UIManager.Instance.DisplayPlayerPoints(_points);
+    }
+
     public void LoadMainMenu()
     {
         PlayerPrefs.SetFloat("PositionX", GameObject.FindGameObjectWithTag("Player").transform.position.x);
         PlayerPrefs.SetFloat("PositionY", GameObject.FindGameObjectWithTag("Player").transform.position.y);
         SceneManager.LoadScene("MainMenu");
-    }
-
-    public void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public int GetPoints()
@@ -80,7 +87,6 @@ public class GameManager : MonoBehaviour
 
     public void AddUnlockStage(int index)
     {
-        _unlockedStage = Math.Max(index, PlayerPrefs.GetInt("UnlockedStage", 1));
-        PlayerPrefs.SetInt("UnlockedStage", _unlockedStage);
+        PlayerPrefs.SetInt("UnlockedStage", index);
     }
 }

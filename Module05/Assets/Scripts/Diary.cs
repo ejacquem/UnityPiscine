@@ -6,15 +6,23 @@ public class Diary : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _diaryText;
 
+    [SerializeField] private GameObject _imageStage1;
+    [SerializeField] private GameObject _imageStage2;
+    [SerializeField] private GameObject _imageStage3;
+
     void Start()
     {
-        int unlocked = PlayerPrefs.GetInt("UnlockedStage", 0);
+        int unlocked = PlayerPrefs.GetInt("UnlockedStage", 1);
         _diaryText.SetText(
             $"Total leaf points: {PlayerPrefs.GetInt("TotalPoints", 0)}\n" + 
-            $"Deaths: {PlayerPrefs.GetInt("Deaths", 0)}\n" + 
-            $"Stage1: {(unlocked >= 1 ? "Unlocked" : "Locked")}\n" + 
-            $"Stage2: {(unlocked >= 2 ? "Unlocked" : "Locked")}\n" + 
-            $"Stage3: {(unlocked >= 3 ? "Unlocked" : "Locked")}\n");
+            $"Deaths: {PlayerPrefs.GetInt("Deaths", 0)}");
+        _imageStage1.SetActive(!(unlocked >= 1));
+        _imageStage2.SetActive(!(unlocked >= 2));
+        _imageStage3.SetActive(!(unlocked >= 3));
+
+        Debug.Log($"!(unlocked >= 1) {!(unlocked >= 1)}");
+        Debug.Log($"!(unlocked >= 2) {!(unlocked >= 2)}");
+        Debug.Log($"!(unlocked >= 3) {!(unlocked >= 3)}");
     }
 
     public void MainMenu()

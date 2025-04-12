@@ -1,6 +1,6 @@
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.GetFloat("PositionY", _spawnPosition.y),
             0);
         SetHealth(PlayerPrefs.GetFloat("Health", _maxHealth));
+        PlayerPrefs.SetInt("Stage", SceneManager.GetActiveScene().buildIndex);
     }
 
     void Update()
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         _health = Mathf.Max(0, health);
         PlayerPrefs.SetFloat("Health", _health);
-        UIManager.Instance.DisplayPlayerHealth(health);
+        UIManager.Instance.DisplayPlayerHealth(_health);
     }
 
     public void Die()

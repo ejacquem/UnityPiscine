@@ -15,8 +15,11 @@ public class Leaf : MonoBehaviour
     {
         _prefix = "leaf_" + SceneManager.GetActiveScene().buildIndex + "_";
         startPos = transform.position;
+        Debug.Log($"Spawning Leaf {_prefix + _ID} --------");
+        Debug.Log($"PlayerPrefs.GetInt(_prefix + _ID, 0) {PlayerPrefs.GetInt(_prefix + _ID, 0)}");
         if (PlayerPrefs.GetInt(_prefix + _ID, 0) == 1)
         {
+            Debug.Log("SetActive(false)");
             gameObject.SetActive(false);
         }
     }

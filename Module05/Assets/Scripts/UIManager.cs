@@ -29,6 +29,11 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex >= 2)
             PauseMenuSetAcrtive(!_pauseMenu.activeSelf);
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("PlayerPref saved !");
+            PlayerPrefs.Save();
+        }
     }
 
     public void DisplayPlayerHealth(float health)

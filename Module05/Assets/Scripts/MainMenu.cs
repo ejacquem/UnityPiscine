@@ -5,13 +5,15 @@ public class MainMenu : MonoBehaviour
 {
     public void ResumeButton()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentScene", 2)); // 2 is Stage1 scene
+        GameManager.Instance.OnLoadStage();
+        SceneManager.LoadScene(PlayerPrefs.GetInt("Stage", 2)); // 2 is Stage1 scene
         UIManager.Instance.SetActive(true);
     }
 
     public void NewGameButton()
     {
         PlayerPrefs.DeleteAll();
+        GameManager.Instance.OnLoadStage();
         SceneManager.LoadScene("Stage1");
         UIManager.Instance.SetActive(true);
     }

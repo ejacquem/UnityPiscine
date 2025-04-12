@@ -21,7 +21,7 @@ public class Vine : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !_animator.GetBool("Attacking"))
         {
-            Debug.Log($"Vine collided with {collision.name}");
+            // Debug.Log($"Vine collided with {collision.name}");
             Attack();
             _player = collision.gameObject;
         }
@@ -39,7 +39,7 @@ public class Vine : MonoBehaviour
     private void Attack()
     {
         _animator.SetBool("Attacking", true);
-        Debug.Log($"Attack");
+        // Debug.Log($"Attack");
     }
 
     public void AttackDone()

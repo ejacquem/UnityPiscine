@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
-        _spawnPosition = transform.position;
+        _spawnPosition = GameObject.FindGameObjectWithTag("PortalStart").transform.position - Vector3.up * 2.5f;
+        transform.position = _spawnPosition;
         SetHealth(_maxHealth);
     }
 
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetHealth(float health)
     {
-        _health = health;
+        _health = Mathf.Max(0, health);
         GameManager.Instance.DisplayPlayerHealth(_health);
     }
 

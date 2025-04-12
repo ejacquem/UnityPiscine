@@ -4,31 +4,34 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector2 _yBound;
     [SerializeField] private float _yOffset;
+    [SerializeField] private bool _followMouse = false;
 
     private Transform _player;
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     void Update()
     {
-        FollowPlayer();
+        if(_followMouse)
+            FollowPos(new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height) * 2f);
+        else if (_player)
+            FollowPos(_player.transform.position);
     }
 
-    private void FollowPlayer()
+    private void FollowPos(Vector3 pos)
     {
-        if (_player == null)
-            return;
-        Vector3 pos = transform.position;
-        pos.y = _yOffset + Mathf.Clamp(_player.transform.position.y, _yBound.x, _yBound.y);
-        pos.x = _player.transform.position.x;
-        transform.position = pos;
+        Vector3 p = transform.position;
+        p.y = _yOffset + Mathf.Clamp(pos.y, _yBound.x, _yBound.y);
+        p.x = pos.x;
+        transform.position = p;
     }
 
     public void OnValidate()
     {
-        FollowPlayer();
+        if (_player)
+            FollowPos(_player.transform.position);
     }
 }

@@ -15,14 +15,16 @@ public class PlayerController : MonoBehaviour
     private Vector2 _input;
     private Animator _animator;
 
-
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
         _spawnPosition = GameObject.FindGameObjectWithTag("PortalStart").transform.position - Vector3.up * 2.5f;
-        transform.position = _spawnPosition;
-        SetHealth(_maxHealth);
+        transform.position = new Vector3(
+            PlayerPrefs.GetFloat("PositionX", _spawnPosition.x),
+            PlayerPrefs.GetFloat("PositionY", _spawnPosition.y),
+            0);
+        SetHealth(PlayerPrefs.GetFloat("Health", _maxHealth));
     }
 
     void Update()
@@ -72,12 +74,14 @@ public class PlayerController : MonoBehaviour
     private void SetHealth(float health)
     {
         _health = Mathf.Max(0, health);
-        GameManager.Instance.DisplayPlayerHealth(_health);
+        PlayerPrefs.SetFloat("Health", _health);
+        UIManager.Instance.DisplayPlayerHealth(health);
     }
 
     public void Die()
     {
         AudioManager.Instance.Play("Death");
+        GameManager.Instance.AddDeaths();
         _animator.SetTrigger("Die");
     }
 

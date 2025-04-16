@@ -14,18 +14,7 @@ public class Gargoyle : MonoBehaviour
     void Start()
     {
         _allGhost = FindObjectsByType<Ghost>(FindObjectsSortMode.None);
-        // _flashLightMat = _model.GetComponent<SkinnedMeshRenderer>().materials[1];
-        // _flashLightMat.color = _flashLightIdle;
-
-        Material[] materials = GetComponent<Renderer>().materials;
-
-        foreach (Material mat in materials)
-        {
-            if (mat.name == _flashLightMatName)
-            {
-                _flashLightMat = _model.GetComponent<SkinnedMeshRenderer>().materials[1];
-            }
-        }
+        _flashLightMat = _model.GetComponent<SkinnedMeshRenderer>().materials[0];
 
         _flashLightMat.SetColor("_EmissionColor", _flashLightIdle);
     }

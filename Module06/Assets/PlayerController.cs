@@ -1,4 +1,4 @@
-using Unity.Mathematics;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,15 +13,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _mouseSensitivity;
     [SerializeField] private bool _fps;
 
-    [SerializeField] private Transform _camera;
+    [SerializeField] private CinemachineCamera _fpsCam;
+    [SerializeField] private CinemachineCamera _tpsCam;
+    [SerializeField] private GameObject _model;
+    private SkinnedMeshRenderer _modelMesh;
     private float _pitch;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
+        _modelMesh = _model.GetComponent<SkinnedMeshRenderer>();
 
         Cursor.lockState = CursorLockMode.Locked;
+    
+        _modelMesh.enabled = !_fps;
+        _fpsCam.Priority = _fps ? 10 : 0;
+        _tpsCam.Priority = _fps ? 0 : 10;
     }
 
     void Update()
@@ -30,17 +38,29 @@ public class PlayerController : MonoBehaviour
             FirstPersonController();
         else 
             ThirdPersonController();
+    }
 
+    public void OnSwitchView(InputValue value)
+    {
+        _fps = !_fps;
+        _modelMesh.enabled = !_fps;
+
+        _fpsCam.Priority = _fps ? 10 : 0;
+        _tpsCam.Priority = _fps ? 0 : 10;
+
+        _fpsCam.transform.localRotation = transform.localRotation;
     }
 
     private void FirstPersonController()
     {
         if (_mouseInput != Vector2.zero)
         {
-            transform.Rotate(0, _mouseInput.x * _mouseSensitivity * Time.deltaTime, 0);
+            _fpsCam.transform.Rotate(0, _mouseInput.x * _mouseSensitivity * Time.deltaTime, 0);
             _pitch += -_mouseInput.y * _mouseSensitivity * Time.deltaTime;
             _pitch = Mathf.Clamp(_pitch, -80f, 80f);
-            _camera.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
+            _fpsCam.transform.localRotation = Quaternion.Euler(_pitch, _fpsCam.transform.localEulerAngles.y, 0f);
+
+            transform.rotation = Quaternion.Euler(0, _fpsCam.transform.eulerAngles.y, 0f);
         }
     }
 

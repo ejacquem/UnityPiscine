@@ -14,7 +14,6 @@ public class Ghost : MonoBehaviour
     private NavMeshAgent _agent;
     private Transform _player;
 
-    private bool _triggered = false; // is true if player spotted
 
     void Start()
     {
@@ -32,8 +31,6 @@ public class Ghost : MonoBehaviour
     {
         if (PlayerSpotted())
             SetPlayerTarget();
-        else
-            _triggered = false;
 
         Vector3 flatPos = transform.position;
         flatPos.y = 0;
@@ -84,7 +81,6 @@ public class Ghost : MonoBehaviour
 
     public void SetPlayerTarget()
     {
-        _triggered = true;
         _agent.SetDestination(_player.position);
     }
 }

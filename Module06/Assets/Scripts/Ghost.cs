@@ -14,7 +14,6 @@ public class Ghost : MonoBehaviour
     private NavMeshAgent _agent;
     private Transform _player;
 
-
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -39,7 +38,7 @@ public class Ghost : MonoBehaviour
 
         if (Vector3.Distance(flatPos, flatTarget) <= 0.5f)
         {
-            Debug.Log("Changing target");
+            // Debug.Log("Changing target");
             NextPoint();
         }        
     }
@@ -54,15 +53,13 @@ public class Ghost : MonoBehaviour
 
         if (directionToPlayer.magnitude <= _visionRange && angle <= _fieldOfView / 2f)
         {
-            if (Physics.Raycast(_origin, directionToPlayer.normalized, out RaycastHit hit, _visionRange, _obstacleMask))
+            if (Physics.Raycast(_origin, directionToPlayer.normalized, out RaycastHit hit, _visionRange, _obstacleMask) && hit.transform.CompareTag("Player"))
             {
                 Debug.DrawRay(_origin, directionToPlayer.normalized * hit.distance, Color.red);
                 return true;
             }
             else
-            {
                 Debug.DrawRay(_origin, directionToPlayer.normalized * hit.distance, Color.green);
-            }
         }
         return false;
     }
@@ -82,5 +79,13 @@ public class Ghost : MonoBehaviour
     public void SetPlayerTarget()
     {
         _agent.SetDestination(_player.position);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            GameManager.Instance.PlayerLose();
+        }
     }
 }

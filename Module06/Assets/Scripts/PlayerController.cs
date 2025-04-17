@@ -59,8 +59,13 @@ public class PlayerController : MonoBehaviour
             _pitch += -_mouseInput.y * _mouseSensitivity * Time.deltaTime;
             _pitch = Mathf.Clamp(_pitch, -80f, 80f);
             _fpsCam.transform.localRotation = Quaternion.Euler(_pitch, _fpsCam.transform.localEulerAngles.y, 0f);
-
-            transform.rotation = Quaternion.Euler(0, _fpsCam.transform.eulerAngles.y, 0f);
+        }
+        
+        if (_input != Vector2.zero)
+        {
+            float camAngle = _fpsCam.transform.rotation.eulerAngles.y;
+            Quaternion playerRotation = Quaternion.Euler(0, camAngle + Mathf.Rad2Deg * Mathf.Atan2(_input.y, -_input.x) - 90f, 0);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, playerRotation, _rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -84,6 +89,11 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         _input = value.Get<Vector2>();
+        
+        if (_input == Vector2.zero)
+            StopFootStepSound();
+        else
+            PlayFootStepSound();
 
         _animator.SetBool("Walking", _input != Vector2.zero);
     }
@@ -91,5 +101,21 @@ public class PlayerController : MonoBehaviour
     public void OnLook(InputValue value)
     {
         _mouseInput = value.Get<Vector2>();
+    }
+
+    private bool _isFootStepPlaying = false;
+
+    private void PlayFootStepSound()
+    {
+        if (_isFootStepPlaying)
+            return;
+        _isFootStepPlaying = true;
+        AudioManager.Instance.Play("FootStep");
+    }
+
+    private void StopFootStepSound()
+    {
+        _isFootStepPlaying = false;
+        AudioManager.Instance.Stop("FootStep");
     }
 }
